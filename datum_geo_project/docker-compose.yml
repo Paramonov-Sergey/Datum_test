@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  geo-db:
+    container_name: geo-db-container
+    image: mdillon/postgis:11
+    volumes:
+      - geo_postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ../.env.dev
+    ports:
+      - 5433:5433
+    restart: always
+    command: -p 5433
+
+  datum_geo:
+    container_name: datum_geo_container
+    build: ./
+    command: bash -c "python /usr/src/datum_geo_app_dir/manage.py migrate --noinput && python /usr/src/datum_geo_app_dir/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/datum_geo_app_dir
+    ports:
+      - 8000:8000
+    env_file:
+      - ../.env.dev
+    depends_on:
+      - geo-db
+
+
+volumes:
+  geo_postgres_data:
+
