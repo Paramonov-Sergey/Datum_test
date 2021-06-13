@@ -78,26 +78,26 @@ WSGI_APPLICATION = 'datum_geo_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'geo_db',
-#         'USER': 'geo_user',
-#         'PASSWORD': '1234567',
-#         'HOST': 'geo-db',
-#         'PORT': '5433',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geo_db',
         'USER': 'geo_user',
         'PASSWORD': '1234567',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'geo-db',
+        'PORT': '5433',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'geo_db',
+#         'USER': 'geo_user',
+#         'PASSWORD': '1234567',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
