@@ -24,4 +24,6 @@ urlpatterns = [
 
     path('country_data/<int:pk>/', InsideCountryDataView.as_view(), name='country-info'),
 
+    path('sum_area/',SumAreaView.as_view(),name='sum_area'),
+
 ]

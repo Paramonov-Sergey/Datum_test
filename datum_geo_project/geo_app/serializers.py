@@ -6,7 +6,8 @@ from rest_framework_gis.serializers import GeoModelSerializer, GeoFeatureModelSe
 
 
 class CityListSerializer(GeoFeatureModelSerializer):
-    country = serializers.ReadOnlyField(source='country.name')
+    # country = serializers.ReadOnlyField(source='country.name')
+    country = serializers.SlugRelatedField(slug_field='name', read_only=True)
 
     class Meta:
         geo_field = 'geometry'
@@ -35,6 +36,8 @@ class CountryListSerializer(GeoFeatureModelSerializer):
 
 
 class CountrySerializer(GeoFeatureModelSerializer):
+    related_city = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
+
     class Meta:
         model = Country
         geo_field = 'location'
@@ -46,7 +49,7 @@ class CapitalListSerializer(GeoModelSerializer):
 
     class Meta:
         model = Capital
-        fields = ('id', 'city',)
+        fields = ('id', 'city')
 
 
 class CapitalCreateSerializer(GeoModelSerializer):
@@ -59,7 +62,7 @@ class CapitalCreateSerializer(GeoModelSerializer):
 
     class Meta:
         model = Capital
-        fields = ('id', 'city',)
+        fields = ('id', 'city')
 
 
 class CapitalSerializer(GeoModelSerializer):
@@ -71,6 +74,7 @@ class CapitalSerializer(GeoModelSerializer):
 
     def update(self, instance, validated_data):
         city = City.objects.get(id=instance.city.id)
+        print(city, type(city))
         city.name = dict(validated_data['city']).get('name')
         city.geometry = dict(validated_data['city']).get('geometry')
         city.description = dict(validated_data['city']).get('description')

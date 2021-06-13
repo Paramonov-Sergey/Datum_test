@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework_gis',
     'drf_yasg',
-
-
     'leaflet',
 ]
 
@@ -80,17 +78,26 @@ WSGI_APPLICATION = 'datum_geo_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'geo_db',
+#         'USER': 'geo_user',
+#         'PASSWORD': '1234567',
+#         'HOST': 'geo-db',
+#         'PORT': '5433',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geo_db',
         'USER': 'geo_user',
         'PASSWORD': '1234567',
-        'HOST': 'geo-db',
-        'PORT': '5433',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -136,8 +143,8 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 5,
     'MAX_ZOOM': 20,
     'MIN_ZOOM': 3,
-    'SCALE':'both',
-    'ATTRIBUTION_PREFIX':'Inspired by Life in GIS'
+    'SCALE': 'both',
+    'ATTRIBUTION_PREFIX': 'Inspired by Life in GIS'
 }
 
 # Default primary key field type
@@ -145,11 +152,10 @@ LEAFLET_CONFIG = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 REST_FRAMEWORK = {
-    # 'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework_gis.pagination.GeoJsonPagination',
-    'PAGE_SIZE': 1
+    'PAGE_SIZE': 1,
 
 }

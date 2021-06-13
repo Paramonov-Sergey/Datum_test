@@ -6,7 +6,7 @@ class Country(models.Model):
     location = models.MultiPolygonField(srid=4326, null=False, blank=False)
 
     def __str__(self):
-        return f'Country : {self.name} cordinates : {self.location}'
+        return f'Country : {self.name} coordinates : {self.location}'
 
     class Meta:
         verbose_name = 'Страна'
